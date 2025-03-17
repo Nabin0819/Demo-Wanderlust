@@ -1,5 +1,4 @@
-
-name: Wanderlust-Continous-Integretion
+name: Wanderlust-Continuous-Integration
 
 on:
   push:
@@ -10,52 +9,48 @@ jobs:
   frontend-build:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v4
-      -
-        name: Set up QEMU
+
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
-      -
-        name: Set up Docker Buildx
+
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      -
-        name: Login to Docker Hub
+
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          
-      - name: Build and push
+
+      - name: Build and push frontend
         uses: docker/build-push-action@v6
         with:
           context: ./frontend/
           push: true
-          tags: nabin011011/wanderlust-frontend:v1.0
-          
-  Backend-Build:
-      runs-on: ubuntu-latest
-      needs: frontend-build
-      steps:
-        
+          tags: |
+            nabin011011/wanderlust-frontend:latest
+            nabin011011/wanderlust-frontend:${{ github.sha }}
+
+  backend-build:
+    runs-on: ubuntu-latest
+    needs: frontend-build
+    steps:
       - name: Checkout
         uses: actions/checkout@v4
-      -
-        name: Set up QEMU
+
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
-      -
-        name: Set up Docker Buildx
+
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      -
-        name: Login to Docker Hub
+
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          
-      -  name: Build and push
-         uses: docker/build-push-action@v6
-         with:
-            context: ./backend/
-            push: true
-            tags: nabin011011/wanderlust-backend:v1.0
+
+      - name: Build and push backend
+        uses:

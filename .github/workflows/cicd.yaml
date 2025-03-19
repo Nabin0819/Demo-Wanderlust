@@ -76,11 +76,6 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
             cd /home/${{ secrets.AWS_USERNAME }}
-
-            # Pull latest images
             docker pull nabin011011/wanderlust-frontend:v1.0
             docker pull nabin011011/wanderlust-backend:v1.0
-
-            # Restart containers with docker-compose
-            docker-compose down
             docker-compose up -d

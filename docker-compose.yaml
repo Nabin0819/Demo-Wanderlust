@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   mongodb:
-    image: "monkeydmagnas007/mongodb:beta-version"
+    image: "nabin011011/mongo:v1.0"
     container_name: "mongodb"
     command: ["bin/bash","-c","mongoimport --db wanderlust --collection posts --file sample_posts.json --jsonArray"]
     ports:
@@ -12,7 +12,7 @@ services:
     restart: always
 
   backend:
-    image: "monkeydmagnas007/wanderlust-backend:poush-batch"
+    image: "nabin011011/wanderlust-backend:latest"
     container_name: "backend"
     environment:
       - PORT=5000
@@ -26,7 +26,7 @@ services:
     restart: always
 
   frontend:
-    image: "monkeydmagnas007/wanderlust-frontend:poush-batch"
+    image: "nabin011011/wanderlust-frontend:latest"
     container_name: "frontend"
     environment:
       - VITE_API_PATH=http://192.168.56.20:5000

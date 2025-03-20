@@ -74,6 +74,9 @@ jobs:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
           key: ${{ secrets.AWS_SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          source: "docker-compose.yaml"
+          traget: /home/ubuntu/
           script: |
             cd /home/${{ secrets.AWS_USERNAME }}
             docker pull nabin011011/wanderlust-frontend:v1.0

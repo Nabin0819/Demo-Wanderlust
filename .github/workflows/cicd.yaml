@@ -93,6 +93,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /home/ubuntu/
-            docker-compose pull
-            docker-compose up -d
-            docker system prune -f
+            sudo docker-compose pull
+            sudo docker-compose up -d
+            sudo docker system prune -f

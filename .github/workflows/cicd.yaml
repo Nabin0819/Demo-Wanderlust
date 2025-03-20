@@ -78,7 +78,6 @@ jobs:
           source: "docker-compose.yaml"
           traget: /home/ubuntu/
           script: |
-            cd /home/${{ secrets.AWS_USERNAME }}
-            docker pull nabin011011/wanderlust-frontend:v1.0
-            docker pull nabin011011/wanderlust-backend:v1.0
+            echo "${DOCKERHUB_PASSWORD}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
             docker-compose up -d
+            docker system prune -f

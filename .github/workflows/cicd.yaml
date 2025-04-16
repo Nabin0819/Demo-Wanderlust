@@ -3,7 +3,7 @@ name: Wanderlust-Continuous-Integration
 on:
   push:
     branches:
-      - production
+      - kube
 
 jobs:
   frontend-build:

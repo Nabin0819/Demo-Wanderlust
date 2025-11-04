@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install --upgradable npm
+RUN npm install --upgradabale npm 
 # Copy the rest of the application code
 COPY . .
 
